@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nikoraxx <nikoraxx@student.42.fr>          +#+  +:+       +#+         #
+#    By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 11:19:16 by nikoraxx          #+#    #+#              #
-#    Updated: 2023/01/24 11:37:00 by nikoraxx         ###   ########.fr        #
+#    Updated: 2023/01/31 16:03:11 by mcorso           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,32 +16,31 @@ C++		=	c++
 FLAGS	=	-Wall -Werror -Wextra
 STD		=	-std=c++98
 
-SRCDIR	=	./
-OBJDIR	=	obj/
+SRCDIR	=	.
+OBJDIR	=	obj
 
-SRCNAME	=	\
-			megaphone.cpp
-OBJNAME	=	$(SRCNAME:.cpp=.o)
+SRCS	=	\
+			main.cpp
 
-SRCS	=	$(addprefix $(SRCDIR), $(SRCNAME))
-OBJS	=	$(addprefix $(OBJDIR), $(OBJNAME))
+OBJS	=	$(SRCS:%.cpp=$(OBJDIR)/%.o)
 
-all		:	$(OBJS)	$(NAME)
+all		:	$(NAME)
 
-$(OBJS)	:	$(SRCS)	obj
+$(NAME)	:	obj $(OBJS)
+			$(C++) $(FLAGS) $(STD) -o $@ $(OBJS)
+
+$(OBJS)	:	$(SRCS)
 			$(C++) $(FLAGS) $(STD) -c $< -o $@
 
 obj		:
 			@mkdir obj
 
-$(NAME)	:	$(OBJS)
-			$(C++) $(FLAGS) $(STD) -o $@ $(OBJS)
 
 clean	:
 			@echo "Cleaning..."
 			@rm -rf $(OBJDIR)
 
 fclean	:	clean
-			@rm $(NAME)
+			@rm -rf $(NAME)
 
 re		:	fclean all
