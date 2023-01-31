@@ -3,45 +3,74 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nikoraxx <nikoraxx@student.42.fr>          +#+  +:+       +#+         #
+#    By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 11:19:16 by nikoraxx          #+#    #+#              #
-#    Updated: 2023/01/26 12:36:49 by nikoraxx         ###   ########.fr        #
+#    Updated: 2023/01/31 17:16:03 by mcorso           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+##		TEXT COLOR			##
+C_RESET				:= \033[0m
+C_PENDING			:= \033[0;36m
+C_SUCCESS			:= \033[0;32m
+
+##		TARGET EXEC			##
 NAME	=	myphonebook
 
+##		COMPIL FLAGS		##
 C++		=	c++
 FLAGS	=	-Wall -Werror -Wextra
 STD		=	-std=c++98
 
-SRCDIR	=	./
-OBJDIR	=	obj/
+##		DIRECTORY			##
+INCDIR	=	includes
+SRCDIR	=	srcs
+OBJDIR	=	obj
 
-SRCNAME	=	\
-			main.cpp
-OBJNAME	=	$(SRCNAME:.cpp=.o)
+##		SOURCES				##
+INCFILES	=	Contact.hpp		\
+				PhoneBook.hpp
 
-SRCS	=	$(addprefix $(SRCDIR), $(SRCNAME))
-OBJS	=	$(addprefix $(OBJDIR), $(OBJNAME))
+SRCFILES	=	Contact.cpp		\
+				PhoneBook.cpp
 
-all		:	$(OBJS)	$(NAME)
+##		INCLUDE FILES		##
+HEAD	=	$(INCFILES:%=$(INCDIR)/%)
 
-$(OBJS)	:	$(SRCS)	obj
-			$(C++) $(FLAGS) $(STD) -c $< -o $@
+##		SOURCE FILES		##
+SRCS	=	$(SRCFILES:%=$(SRCDIR)/%)
+
+##		OBJECT FILES		##
+OBJS	=	$(SRCFILES:%.cpp=$(OBJDIR)/%.o)
+OBJS	+=	$(OBJDIR)/main.o
+
+#	#	#	RULES	#	#	#
+
+all		:	$(NAME)
+
+$(NAME)	:	$(HEAD) obj $(OBJS)
+			@echo -n "--  "
+			$(C++) $(FLAGS) $(STD) -o $@ $(OBJS)
+			@echo "$(C_SUCCESS)🮱   Compilation done !$(C_RESET)"
 
 obj		:
 			@mkdir obj
 
-$(NAME)	:	$(OBJS)
-			$(C++) $(FLAGS) $(STD) -o $@ $(OBJS)
+$(OBJDIR)/main.o	:	main.cpp
+			@echo -n "--  "
+			$(C++) $(FLAGS) $(STD) -c $^ -o $@
+
+$(OBJDIR)/%.o	:	$(SRCDIR)/%.cpp
+			@echo -n "--  "
+			$(C++) $(FLAGS) $(STD) -c $^ -o $@
 
 clean	:
-			@echo "Cleaning..."
+			@echo "$(C_PENDING)⌛  Cleaning sources...$(C_RESET)"
 			@rm -rf $(OBJDIR)
 
 fclean	:	clean
-			@rm $(NAME)
+			@echo "$(C_PENDING)⌛  Cleaning executable...$(C_RESET)"
+			@rm -rf $(NAME)
 
 re		:	fclean all

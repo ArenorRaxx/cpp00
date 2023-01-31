@@ -1,40 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Contact.hpp                                        :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikoraxx <nikoraxx@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 18:30:13 by nikoraxx          #+#    #+#             */
-/*   Updated: 2023/01/27 13:55:22 by nikoraxx         ###   ########.fr       */
+/*   Created: 2023/01/31 16:09:20 by mcorso            #+#    #+#             */
+/*   Updated: 2023/01/31 16:09:57 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/Contact.hpp"
 #include <iostream>
 #include <iomanip>
-#include <cstring>
-
-#ifndef CONTACT_HPP
-# define CONTACT_HPP
-
-class Contact
-{
-	private:
-		std::string first_name;
-		std::string last_name;
-		std::string nickname;
-		std::string phone_number;
-		std::string darkest_secret;
-		std::string	FormatInfo(std::string info);
-	
-	public:
-		int         index;
-		Contact();
-		~Contact();
-		void DisplayAllInfo(void);
-		void DisplayFormatedInfo(void);
-		void FillContact(std::string first_name, std::string last_name, std::string nickname, std::string phone_number, std::string darkest_secret);
-};
 
 Contact::Contact()
 {
@@ -85,5 +63,3 @@ void Contact::DisplayFormatedInfo(void)
 	std::cout << std::setw(10) << Contact::FormatInfo(this->nickname);
 	std::cout << "\n";
 }
-
-#endif

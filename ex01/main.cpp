@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikoraxx <nikoraxx@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:35:08 by nikoraxx          #+#    #+#             */
-/*   Updated: 2023/01/27 14:08:22 by nikoraxx         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:44:20 by mcorso           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cstdio>
-#include <cstdlib>
-#include "Contact.hpp"
-#include "PhoneBook.hpp"
+#include "includes/Contact.hpp"
+#include "includes/PhoneBook.hpp"
+#include <iostream>
 
 static int	create_new_contact(PhoneBook *my_phone);
 static int	ft_stoi(std::string input);
