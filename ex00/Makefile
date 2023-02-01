@@ -6,7 +6,7 @@
 #    By: mcorso <mcorso@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/24 11:19:16 by nikoraxx          #+#    #+#              #
-#    Updated: 2023/01/31 16:03:11 by mcorso           ###   ########.fr        #
+#    Updated: 2023/02/01 11:00:54 by mcorso           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCDIR	=	.
 OBJDIR	=	obj
 
 SRCS	=	\
-			main.cpp
+			megaphone.cpp
 
 OBJS	=	$(SRCS:%.cpp=$(OBJDIR)/%.o)
 
